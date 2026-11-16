@@ -1,0 +1,181 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_game"]
+[ext_resource type="Texture2D" path="res://art/court.png" id="2_court"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ball.tscn" id="4_ball"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_floor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
+size = Vector2(40, 3000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_board"]
+size = Vector2(26, 156)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rim"]
+size = Vector2(10, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_zone"]
+size = Vector2(36, 16)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_game")
+
+[node name="Court" type="Sprite2D" parent="."]
+texture = ExtResource("2_court")
+centered = false
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 605)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_floor")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(36, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1246, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("RectangleShape2D_wall")
+
+[node name="LeftHoop" type="Node2D" parent="."]
+
+[node name="Backboard" type="StaticBody2D" parent="LeftHoop"]
+position = Vector2(107, 326)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHoop/Backboard"]
+shape = SubResource("RectangleShape2D_board")
+
+[node name="Rim" type="StaticBody2D" parent="LeftHoop"]
+position = Vector2(184, 389)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHoop/Rim"]
+shape = SubResource("RectangleShape2D_rim")
+one_way_collision = true
+
+[node name="ScoreZone" type="Area2D" parent="LeftHoop"]
+position = Vector2(150, 410)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftHoop/ScoreZone"]
+shape = SubResource("RectangleShape2D_zone")
+
+[node name="RimCenter" type="Marker2D" parent="LeftHoop"]
+position = Vector2(154, 386)
+
+[node name="RightHoop" type="Node2D" parent="."]
+
+[node name="Backboard" type="StaticBody2D" parent="RightHoop"]
+position = Vector2(1172, 326)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightHoop/Backboard"]
+shape = SubResource("RectangleShape2D_board")
+
+[node name="Rim" type="StaticBody2D" parent="RightHoop"]
+position = Vector2(1096, 389)
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightHoop/Rim"]
+shape = SubResource("RectangleShape2D_rim")
+one_way_collision = true
+
+[node name="ScoreZone" type="Area2D" parent="RightHoop"]
+position = Vector2(1130, 410)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightHoop/ScoreZone"]
+shape = SubResource("RectangleShape2D_zone")
+
+[node name="RimCenter" type="Marker2D" parent="RightHoop"]
+position = Vector2(1126, 386)
+
+[node name="Player1" parent="." instance=ExtResource("3_player")]
+position = Vector2(520, 520)
+
+[node name="Player2" parent="." instance=ExtResource("3_player")]
+position = Vector2(760, 520)
+player_number = 2
+attack_dir = -1
+
+[node name="Ball" parent="." instance=ExtResource("4_ball")]
+position = Vector2(640, 400)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+offset_left = 390.0
+offset_top = 14.0
+offset_right = 890.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 44
+text = "P1    0  -  0    P2"
+horizontal_alignment = 1
+
+[node name="HintLabel" type="Label" parent="UI"]
+offset_left = 14.0
+offset_top = 10.0
+offset_right = 314.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 16
+text = "first to 11   |   Esc = menu"
+
+[node name="MessageLabel" type="Label" parent="UI"]
+offset_left = 290.0
+offset_top = 120.0
+offset_right = 990.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 56
+text = "BLOCKED!"
+horizontal_alignment = 1
+
+[node name="WinPanel" type="Panel" parent="UI"]
+offset_left = 390.0
+offset_top = 190.0
+offset_right = 890.0
+offset_bottom = 470.0
+
+[node name="WinLabel" type="Label" parent="UI/WinPanel"]
+offset_top = 40.0
+offset_right = 500.0
+offset_bottom = 120.0
+theme_override_font_sizes/font_size = 48
+text = "PLAYER 1 WINS!"
+horizontal_alignment = 1
+
+[node name="PlayAgainButton" type="Button" parent="UI/WinPanel"]
+offset_left = 40.0
+offset_top = 170.0
+offset_right = 240.0
+offset_bottom = 230.0
+text = "Play again"
+
+[node name="MenuButton" type="Button" parent="UI/WinPanel"]
+offset_left = 260.0
+offset_top = 170.0
+offset_right = 460.0
+offset_bottom = 230.0
+text = "Menu"
+
+[connection signal="body_entered" from="LeftHoop/ScoreZone" to="." method="_on_left_score_zone_body_entered"]
+[connection signal="body_entered" from="RightHoop/ScoreZone" to="." method="_on_right_score_zone_body_entered"]
+[connection signal="shoot" from="Player1" to="." method="_on_player_shoot"]
+[connection signal="steal" from="Player1" to="." method="_on_player_steal"]
+[connection signal="shoot" from="Player2" to="." method="_on_player_shoot"]
+[connection signal="steal" from="Player2" to="." method="_on_player_steal"]
+[connection signal="pressed" from="UI/WinPanel/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="UI/WinPanel/MenuButton" to="." method="_on_menu_button_pressed"]

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://bpd47b8xhqr41"]
+
+[ext_resource type="Script" uid="uid://k7n37xfyckwk" path="res://scripts/menu.gd" id="1_menu"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vjb58"]
+load_path = "res://.godot/imported/court.png-aaab3832e864fa5b1d2ccf439b75c14c.ctex"
+
+[node name="Menu" type="Control" unique_id=223665708]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="." unique_id=461613201]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = SubResource("CompressedTexture2D_vjb58")
+
+[node name="Title" type="Label" parent="." unique_id=1497187408]
+layout_mode = 0
+offset_top = 50.0
+offset_right = 1280.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 80
+text = "DOODLE BALLS"
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=1146614779]
+layout_mode = 0
+offset_left = 510.0
+offset_top = 190.0
+offset_right = 770.0
+offset_bottom = 430.0
+theme_override_constants/separation = 18
+
+[node name="PlayButton" type="Button" parent="Buttons" unique_id=1916335251]
+custom_minimum_size = Vector2(260, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "PLAY"
+
+[node name="SkinsButton" type="Button" parent="Buttons" unique_id=376652411]
+custom_minimum_size = Vector2(260, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "SKINS"
+
+[node name="HowToPlayButton" type="Button" parent="Buttons" unique_id=1762005911]
+custom_minimum_size = Vector2(260, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "HOW TO PLAY"
+
+[connection signal="pressed" from="Buttons/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Buttons/SkinsButton" to="." method="_on_skins_button_pressed"]
+[connection signal="pressed" from="Buttons/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]

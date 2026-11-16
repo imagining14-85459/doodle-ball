@@ -1,0 +1,142 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/skins_menu.gd" id="1_skins"]
+
+[node name="Skins" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_skins")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 30.0
+offset_right = 1280.0
+offset_bottom = 110.0
+theme_override_font_sizes/font_size = 60
+text = "SKINS"
+horizontal_alignment = 1
+
+[node name="Player1" type="Control" parent="."]
+layout_mode = 0
+offset_left = 190.0
+offset_top = 120.0
+offset_right = 590.0
+offset_bottom = 600.0
+
+[node name="Title" type="Label" parent="Player1"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 32
+text = "PLAYER 1"
+horizontal_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="Player1"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 55.0
+offset_right = 300.0
+offset_bottom = 405.0
+expand_mode = 1
+stretch_mode = 5
+flip_h = false
+
+[node name="LeftButton" type="Button" parent="Player1"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 420.0
+offset_right = 120.0
+offset_bottom = 480.0
+text = "<"
+
+[node name="SkinName" type="Label" parent="Player1"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 420.0
+offset_right = 280.0
+offset_bottom = 480.0
+text = "Blue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightButton" type="Button" parent="Player1"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 420.0
+offset_right = 350.0
+offset_bottom = 480.0
+text = ">"
+
+[node name="Player2" type="Control" parent="."]
+layout_mode = 0
+offset_left = 690.0
+offset_top = 120.0
+offset_right = 1090.0
+offset_bottom = 600.0
+
+[node name="Title" type="Label" parent="Player2"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 44.0
+theme_override_font_sizes/font_size = 32
+text = "PLAYER 2"
+horizontal_alignment = 1
+
+[node name="Preview" type="TextureRect" parent="Player2"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 55.0
+offset_right = 300.0
+offset_bottom = 405.0
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="LeftButton" type="Button" parent="Player2"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 420.0
+offset_right = 120.0
+offset_bottom = 480.0
+text = "<"
+
+[node name="SkinName" type="Label" parent="Player2"]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 420.0
+offset_right = 280.0
+offset_bottom = 480.0
+text = "Blue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightButton" type="Button" parent="Player2"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 420.0
+offset_right = 350.0
+offset_bottom = 480.0
+text = ">"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 620.0
+offset_right = 740.0
+offset_bottom = 680.0
+text = "Back"
+
+[connection signal="pressed" from="Player1/LeftButton" to="." method="_on_p1_left_button_pressed"]
+[connection signal="pressed" from="Player1/RightButton" to="." method="_on_p1_right_button_pressed"]
+[connection signal="pressed" from="Player2/LeftButton" to="." method="_on_p2_left_button_pressed"]
+[connection signal="pressed" from="Player2/RightButton" to="." method="_on_p2_right_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
